@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserUpdate;
 import com.sendkite.teatapp.user.infrastructure.UserEntity;
-import com.sendkite.teatapp.user.infrastructure.UserRepository;
+import com.sendkite.teatapp.user.infrastructure.UserJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -35,7 +35,7 @@ public class UserCreateControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userJpaRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
@@ -71,7 +71,7 @@ public class UserCreateControllerTest {
                 get("/api/users/2/verify")
                     .queryParam("certificationCode", "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"))
             .andExpect(status().isFound());
-        UserEntity userEntity = userRepository.findById(1L).get();
+        UserEntity userEntity = userJpaRepository.findById(1L).get();
         assertThat(userEntity.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 

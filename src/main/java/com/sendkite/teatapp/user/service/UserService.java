@@ -6,7 +6,7 @@ import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserCreate;
 import com.sendkite.teatapp.user.domain.UserUpdate;
 import com.sendkite.teatapp.user.infrastructure.UserEntity;
-import com.sendkite.teatapp.user.infrastructure.UserRepository;
+import com.sendkite.teatapp.user.service.port.UserRepository;
 import java.time.Clock;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

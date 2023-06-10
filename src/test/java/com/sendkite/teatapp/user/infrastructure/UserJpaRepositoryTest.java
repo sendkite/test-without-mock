@@ -10,10 +10,10 @@ import org.springframework.test.context.jdbc.Sql;
 
 @DataJpaTest(showSql = true)
 @Sql("/sql/user-repository-test-data.sql")
-class UserRepositoryTest {
+class UserJpaRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userJpaRepository;
 
     @Test
     void findByIdAndStatus_조회_성공() {
@@ -23,7 +23,7 @@ class UserRepositoryTest {
         UserStatus userStatus = UserStatus.ACTIVE;
 
         // when
-        var user = userRepository.findByIdAndStatus(id, userStatus);
+        var user = userJpaRepository.findByIdAndStatus(id, userStatus);
 
         // then
         assertThat(user).isPresent();
@@ -39,7 +39,7 @@ class UserRepositoryTest {
         UserStatus userStatus = UserStatus.ACTIVE;
 
         // when
-        var user = userRepository.findByIdAndStatus(id, userStatus);
+        var user = userJpaRepository.findByIdAndStatus(id, userStatus);
 
         // then
         assertThat(user.isEmpty()).isTrue();
@@ -52,7 +52,7 @@ class UserRepositoryTest {
         String email = "hello@hello.com";
 
         // when
-        var user = userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE);
+        var user = userJpaRepository.findByEmailAndStatus(email, UserStatus.ACTIVE);
 
         // then
         assertThat(user.isPresent()).isTrue();
@@ -65,7 +65,7 @@ class UserRepositoryTest {
         String email = "no@hello.com";
 
         // when
-        var user = userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE);
+        var user = userJpaRepository.findByEmailAndStatus(email, UserStatus.ACTIVE);
 
         // then
         assertThat(user.isEmpty()).isTrue();

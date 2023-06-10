@@ -1,12 +1,16 @@
-package com.sendkite.teatapp.user.infrastructure;
+package com.sendkite.teatapp.user.service.port;
 
 import com.sendkite.teatapp.user.domain.UserStatus;
+import com.sendkite.teatapp.user.infrastructure.UserEntity;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository {
 
     Optional<UserEntity> findByIdAndStatus(long id, UserStatus userStatus);
 
     Optional<UserEntity> findByEmailAndStatus(String email, UserStatus userStatus);
+
+    UserEntity save(UserEntity userEntity);
+
+    Optional<UserEntity> findById(long id);
 }
