@@ -6,10 +6,9 @@ import com.sendkite.teatapp.model.dto.PostUpdateDto;
 import com.sendkite.teatapp.repository.PostEntity;
 import com.sendkite.teatapp.repository.PostRepository;
 import com.sendkite.teatapp.repository.UserEntity;
+import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.Clock;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +18,8 @@ public class PostService {
     private final UserService userService;
 
     public PostEntity getById(long id) {
-        return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posts", id));
+        return postRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Posts", id));
     }
 
     public PostEntity create(PostCreateDto postCreateDto) {

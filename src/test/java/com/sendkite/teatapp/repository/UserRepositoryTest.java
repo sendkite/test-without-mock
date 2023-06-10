@@ -1,12 +1,12 @@
 package com.sendkite.teatapp.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.sendkite.teatapp.model.UserStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
-
-import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest(showSql = true)
 @Sql("/sql/user-repository-test-data.sql")

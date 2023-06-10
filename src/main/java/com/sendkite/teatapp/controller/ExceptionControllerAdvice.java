@@ -1,5 +1,8 @@
 package com.sendkite.teatapp.controller;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 import com.sendkite.teatapp.exception.CertificationCodeNotMatchedException;
 import com.sendkite.teatapp.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -9,9 +12,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -28,7 +28,8 @@ public class ExceptionControllerAdvice {
     @ResponseBody
     @ResponseStatus(FORBIDDEN)
     @ExceptionHandler(CertificationCodeNotMatchedException.class)
-    public String certificationCodeNotMatchedException(CertificationCodeNotMatchedException exception) {
+    public String certificationCodeNotMatchedException(
+        CertificationCodeNotMatchedException exception) {
         return exception.getMessage();
     }
 

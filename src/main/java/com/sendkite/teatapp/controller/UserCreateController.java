@@ -26,8 +26,8 @@ public class UserCreateController {
     public ResponseEntity<UserResponse> createUser(@RequestBody UserCreateDto userCreateDto) {
         UserEntity userEntity = userService.create(userCreateDto);
         return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(userController.toResponse(userEntity));
+            .status(HttpStatus.CREATED)
+            .body(userController.toResponse(userEntity));
     }
 
 }

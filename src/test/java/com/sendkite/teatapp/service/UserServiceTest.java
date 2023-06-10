@@ -1,5 +1,9 @@
 package com.sendkite.teatapp.service;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+
 import com.sendkite.teatapp.exception.CertificationCodeNotMatchedException;
 import com.sendkite.teatapp.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.model.UserStatus;
@@ -17,14 +21,10 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.jdbc.SqlGroup;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-
 @SpringBootTest
 @SqlGroup({
-        @Sql(value = "/sql/user-service-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
-        @Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = "/sql/user-service-test-data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD),
+    @Sql(value = "/sql/delete-all-data.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 })
 @Sql("/sql/user-service-test-data.sql")
 class UserServiceTest {
@@ -57,7 +57,7 @@ class UserServiceTest {
         // when
         // then
         assertThatThrownBy(() -> {
-                var user = userService.getByEmail(email);
+            var user = userService.getByEmail(email);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -87,10 +87,10 @@ class UserServiceTest {
     void userCreateDto_를_이용하여_유저를_생성할_수_있다() {
         // given
         UserCreateDto userCreateDto = UserCreateDto.builder()
-                .email("test@hello.com")
-                .address("Gyeongi")
-                .nickname("hello-create")
-                .build();
+            .email("test@hello.com")
+            .address("Gyeongi")
+            .nickname("hello-create")
+            .build();
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         // when
@@ -105,9 +105,9 @@ class UserServiceTest {
     void userUpdateDto_를_이용하여_유저를_수정할_수_있다() {
         // given
         UserUpdateDto userUpdateDto = UserUpdateDto.builder()
-                .address("Incheon")
-                .nickname("songyeon")
-                .build();
+            .address("Incheon")
+            .nickname("songyeon")
+            .build();
 
         // when
         userService.update(1L, userUpdateDto);
@@ -147,7 +147,7 @@ class UserServiceTest {
         // when
         // then
         assertThatThrownBy(() ->
-                userService.verifyEmail(2, "aaaa-worng-code")
+            userService.verifyEmail(2, "aaaa-worng-code")
         ).isInstanceOf(CertificationCodeNotMatchedException.class);
     }
 }
