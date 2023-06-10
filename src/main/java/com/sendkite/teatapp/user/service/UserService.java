@@ -10,8 +10,6 @@ import com.sendkite.teatapp.user.service.port.UserRepository;
 import java.time.Clock;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final JavaMailSender mailSender;
+    private final CertificationService certificationService;
+
 
     public UserEntity getByEmail(String email) {
         return userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)
@@ -60,8 +59,7 @@ public class UserService {
         userEntity.setStatus(UserStatus.PENDING);
         userEntity.setCertificationCode(UUID.randomUUID().toString());
         userEntity = userRepository.save(userEntity);
-        String certificationUrl = generateCertificationUrl(userEntity);
-        sendCertificationEmail(userCreate.getEmail(), certificationUrl);
+        certificationService.send(userCreate.getEmail(), userEntity.getId(), userEntity.getCertificationCode());
         return userEntity;
     }
 
@@ -72,19 +70,5 @@ public class UserService {
         userEntity.setAddress(userUpdate.getAddress());
         userEntity = userRepository.save(userEntity);
         return userEntity;
-    }
-
-    private void sendCertificationEmail(String email, String certificationUrl) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("TeaTapp Email Certification");
-        message.setText(
-            "Please click the link below to verify your email address:\n" + certificationUrl);
-        mailSender.send(message);
-    }
-
-    private String generateCertificationUrl(UserEntity userEntity) {
-        return "http://localhost:8080/api/users/" + userEntity.getId()
-            + "/verify?certificationCode=" + userEntity.getCertificationCode();
     }
 }
