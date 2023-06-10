@@ -1,16 +1,16 @@
 package com.sendkite.teatapp.user.service.port;
 
+import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
-import com.sendkite.teatapp.user.infrastructure.UserEntity;
 import java.util.Optional;
 
 public interface UserRepository {
 
-    Optional<UserEntity> findByIdAndStatus(long id, UserStatus userStatus);
+    Optional<User> findByIdAndStatus(long id, UserStatus userStatus);
 
-    Optional<UserEntity> findByEmailAndStatus(String email, UserStatus userStatus);
+    Optional<User> findByEmailAndStatus(String email, UserStatus userStatus);
 
-    UserEntity save(UserEntity userEntity);
+    User save(User userEntity);
 
-    Optional<UserEntity> findById(long id);
+    Optional<User> findById(long id);
 }

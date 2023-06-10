@@ -6,11 +6,10 @@ import static org.mockito.ArgumentMatchers.any;
 
 import com.sendkite.teatapp.common.domain.exception.CertificationCodeNotMatchedException;
 import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
+import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserCreate;
 import com.sendkite.teatapp.user.domain.UserUpdate;
-import com.sendkite.teatapp.user.infrastructure.UserEntity;
-import com.sendkite.teatapp.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,10 +94,10 @@ class UserServiceTest {
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         // when
-        UserEntity userEntity = userService.create(userCreate);
+        User user = userService.create(userCreate);
 
-        assertThat(userEntity.getId()).isNotNull();
-        assertThat(userEntity.getStatus()).isEqualTo(UserStatus.PENDING);
+        assertThat(user.getId()).isNotNull();
+        assertThat(user.getStatus()).isEqualTo(UserStatus.PENDING);
 //        assertThat(userEntity.getCertificationCode()).isEqualTo("123456"); // FIXME
     }
 
@@ -114,7 +113,7 @@ class UserServiceTest {
         userService.update(1L, userUpdate);
 
         // then
-        UserEntity user = userService.getById(1L);
+        User user = userService.getById(1L);
         assertThat(user.getNickname()).isEqualTo("songyeon");
         assertThat(user.getAddress()).isEqualTo("Incheon");
     }
@@ -126,7 +125,7 @@ class UserServiceTest {
         userService.login(1);
 
         // then
-        UserEntity user = userService.getById(1L);
+        User user = userService.getById(1L);
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(user.getLastLoginAt()).isGreaterThan(0L); // FIXME
     }
@@ -138,7 +137,7 @@ class UserServiceTest {
         userService.verifyEmail(2, "aaaa-aaaaa-aaaaa-aaaaaab");
 
         // then
-        UserEntity user = userService.getById(2);
+        User user = userService.getById(2);
         assertThat(user.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 

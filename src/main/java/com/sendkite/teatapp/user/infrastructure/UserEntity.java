@@ -1,5 +1,6 @@
 package com.sendkite.teatapp.user.infrastructure;
 
+import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,4 +43,27 @@ public class UserEntity {
     @Column(name = "last_login_at")
     private Long lastLoginAt;
 
+    public static UserEntity fromDomain(User user) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.id = user.getId();
+        userEntity.email = user.getEmail();
+        userEntity.address = user.getAddress();
+        userEntity.certificationCode = user.getCertificationCode();
+        userEntity.nickname = user.getNickname();
+        userEntity.status = user.getStatus();
+        userEntity.lastLoginAt = user.getLastLoginAt();
+        return userEntity;
+    }
+
+    public User toDomain() {
+        return User.builder()
+            .id(id)
+            .email(email)
+            .nickname(nickname)
+            .address(address)
+            .certificationCode(certificationCode)
+            .status(status)
+            .lastLoginAt(lastLoginAt)
+            .build();
+    }
 }

@@ -1,8 +1,8 @@
 package com.sendkite.teatapp.post.infrastructure;
 
+import com.sendkite.teatapp.post.domain.Post;
 import com.sendkite.teatapp.post.service.port.PostRepository;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,12 +13,12 @@ public class PostRepositoryImpl implements PostRepository {
     private final PostJpaRepository postJpaRepository;
 
     @Override
-    public Optional<PostEntity> findById(long id) {
-        return postJpaRepository.findById(id);
+    public Optional<Post> findById(long id) {
+        return postJpaRepository.findById(id).map(PostEntity::toDomain);
     }
 
     @Override
-    public PostEntity save(PostEntity postEntity) {
-        return postJpaRepository.save(postEntity);
+    public Post save(Post post) {
+        return postJpaRepository.save(PostEntity.fromDomain(post)).toDomain();
     }
 }

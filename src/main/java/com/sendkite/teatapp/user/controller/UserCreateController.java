@@ -1,5 +1,6 @@
 package com.sendkite.teatapp.user.controller;
 
+import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserCreate;
 import com.sendkite.teatapp.user.controller.response.UserResponse;
 import com.sendkite.teatapp.user.infrastructure.UserEntity;
@@ -19,15 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserCreateController {
 
-    private final UserController userController;
     private final UserService userService;
 
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@RequestBody UserCreate userCreate) {
-        UserEntity userEntity = userService.create(userCreate);
+        User user = userService.create(userCreate);
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(userController.toResponse(userEntity));
+            .body(UserResponse.from(user));
     }
 
 }
