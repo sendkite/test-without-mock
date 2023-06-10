@@ -1,4 +1,4 @@
-package com.sendkite.teatapp.service;
+package com.sendkite.teatapp.user.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

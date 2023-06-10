@@ -1,9 +1,8 @@
-package com.sendkite.teatapp.repository;
+package com.sendkite.teatapp.user.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sendkite.teatapp.user.domain.UserStatus;
-import com.sendkite.teatapp.user.infrastructure.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

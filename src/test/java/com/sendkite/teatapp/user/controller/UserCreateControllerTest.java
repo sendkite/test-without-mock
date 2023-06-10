@@ -1,4 +1,4 @@
-package com.sendkite.teatapp.controller;
+package com.sendkite.teatapp.user.controller;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
