@@ -37,6 +37,4 @@ public class PostService {
         postEntity.setModifiedAt(Clock.systemUTC().millis());
         return postRepository.save(postEntity);
     }
-
-
 }
