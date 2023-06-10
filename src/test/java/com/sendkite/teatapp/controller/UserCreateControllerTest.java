@@ -8,10 +8,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sendkite.teatapp.model.UserStatus;
-import com.sendkite.teatapp.model.dto.UserUpdateDto;
-import com.sendkite.teatapp.repository.UserEntity;
-import com.sendkite.teatapp.repository.UserRepository;
+import com.sendkite.teatapp.user.domain.UserStatus;
+import com.sendkite.teatapp.user.domain.UserUpdate;
+import com.sendkite.teatapp.user.infrastructure.UserEntity;
+import com.sendkite.teatapp.user.infrastructure.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -105,7 +105,7 @@ public class UserCreateControllerTest {
     @Test
     void 사용자는_내_정보를_수정할_수_있다() throws Exception {
         // given
-        UserUpdateDto userUpdateDto = UserUpdateDto.builder()
+        UserUpdate userUpdate = UserUpdate.builder()
             .nickname("hello2-n")
             .address("Pangyo")
             .build();
@@ -116,7 +116,7 @@ public class UserCreateControllerTest {
                 put("/api/users/me")
                     .header("EMAIL", "hello2@naver.com")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(userUpdateDto)))
+                    .content(objectMapper.writeValueAsString(userUpdate)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(1))
             .andExpect(jsonPath("$.email").value("hello2@naver.com"))
