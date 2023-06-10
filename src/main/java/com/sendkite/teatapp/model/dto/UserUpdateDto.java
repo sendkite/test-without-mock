@@ -12,9 +12,9 @@ public class UserUpdateDto {
 
     @Builder
     public UserUpdateDto(
-            @JsonProperty("nickname") String email,
+            @JsonProperty("nickname") String nickname,
             @JsonProperty("address") String address) {
-        this.nickname = email;
+        this.nickname = nickname;
         this.address = address;
     }
 }
