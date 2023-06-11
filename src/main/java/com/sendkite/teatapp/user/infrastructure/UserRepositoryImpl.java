@@ -1,5 +1,6 @@
 package com.sendkite.teatapp.user.infrastructure;
 
+import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.service.port.UserRepository;
@@ -31,5 +32,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(long id) {
         return userJpaRepository.findById(id).map(UserEntity::toDomain);
+    }
+
+    @Override
+    public User getById(long id) {
+        return findById(id).orElseThrow(
+            () -> new ResourceNotFoundException("Users", id)
+        );
     }
 }

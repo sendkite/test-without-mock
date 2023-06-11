@@ -2,7 +2,6 @@ package com.sendkite.teatapp.mock;
 
 import com.sendkite.teatapp.post.domain.Post;
 import com.sendkite.teatapp.post.service.port.PostRepository;
-import com.sendkite.teatapp.user.domain.User;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

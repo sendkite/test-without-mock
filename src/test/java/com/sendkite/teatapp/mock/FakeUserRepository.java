@@ -1,5 +1,6 @@
 package com.sendkite.teatapp.mock;
 
+import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.service.port.UserRepository;
@@ -20,6 +21,16 @@ public class FakeUserRepository implements UserRepository {
         return data.stream()
             .filter(u -> u.getId().equals(id))
             .findAny();
+    }
+
+    @Override
+    public User getById(long id) {
+        return data.stream()
+            .filter(u -> u.getId().equals(id))
+            .findAny()
+            .orElseThrow(
+                () -> new ResourceNotFoundException("Users", id)
+            );
     }
 
     @Override

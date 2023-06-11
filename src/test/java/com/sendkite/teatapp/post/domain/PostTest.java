@@ -2,6 +2,7 @@ package com.sendkite.teatapp.post.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.sendkite.teatapp.mock.TestClockHolder;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class PostTest {
             .build();
 
         // when
-        Post post = Post.from(writer, postCreate);
+        Post post = Post.from(writer, postCreate, new TestClockHolder(1679530673958L));
 
         // then
         assertThat(post.getContent()).isEqualTo("helloworld");
@@ -33,6 +34,7 @@ class PostTest {
         assertThat(post.getWriter().getNickname()).isEqualTo("hello2");
         assertThat(post.getWriter().getAddress()).isEqualTo("Seoul");
         assertThat(post.getWriter().getStatus()).isEqualTo(UserStatus.ACTIVE);
+        assertThat(post.getCreatedAt()).isEqualTo(1679530673958L);
         assertThat(post.getWriter().getCertificationCode()).isEqualTo(
             "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
     }
