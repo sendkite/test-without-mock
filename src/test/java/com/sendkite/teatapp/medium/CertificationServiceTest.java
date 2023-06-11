@@ -1,8 +1,9 @@
-package com.sendkite.teatapp.user.service;
+package com.sendkite.teatapp.medium;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sendkite.teatapp.mock.FakeMailSender;
+import com.sendkite.teatapp.user.service.CertificationService;
 import org.junit.jupiter.api.Test;
 
 class CertificationServiceTest {

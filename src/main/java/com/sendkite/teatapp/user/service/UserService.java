@@ -8,11 +8,13 @@ import com.sendkite.teatapp.user.domain.UserCreate;
 import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserUpdate;
 import com.sendkite.teatapp.user.service.port.UserRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 public class UserService {
 
