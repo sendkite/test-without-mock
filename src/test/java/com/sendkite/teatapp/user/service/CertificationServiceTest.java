@@ -1,6 +1,6 @@
 package com.sendkite.teatapp.user.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.sendkite.teatapp.mock.FakeMailSender;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,8 @@ class CertificationServiceTest {
         // then
         assertThat(fakeMailSender.email).isEqualTo("hello2@naver.com");
         assertThat(fakeMailSender.title).isEqualTo("TeaTapp Email Certification");
-        assertThat(fakeMailSender.content).isEqualTo("Please click the link below to verify your email address:\n"
-            + "http://localhost:8080/api/users/1/verify?certificationCode=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
+        assertThat(fakeMailSender.content).isEqualTo(
+            "Please click the link below to verify your email address:\n"
+                + "http://localhost:8080/api/users/1/verify?certificationCode=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
     }
 }

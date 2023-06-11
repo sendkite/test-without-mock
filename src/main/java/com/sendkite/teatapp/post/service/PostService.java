@@ -4,11 +4,9 @@ import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.post.domain.Post;
 import com.sendkite.teatapp.post.domain.PostCreate;
 import com.sendkite.teatapp.post.domain.PostUpdate;
-import com.sendkite.teatapp.post.infrastructure.PostEntity;
 import com.sendkite.teatapp.post.service.port.PostRepository;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.service.UserService;
-import java.time.Clock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

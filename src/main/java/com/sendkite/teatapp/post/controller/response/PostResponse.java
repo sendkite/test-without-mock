@@ -4,7 +4,6 @@ import com.sendkite.teatapp.post.domain.Post;
 import com.sendkite.teatapp.user.controller.response.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Builder

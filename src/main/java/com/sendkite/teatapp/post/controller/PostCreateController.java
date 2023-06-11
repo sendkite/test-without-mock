@@ -1,7 +1,7 @@
 package com.sendkite.teatapp.post.controller;
 
-import com.sendkite.teatapp.post.domain.PostCreate;
 import com.sendkite.teatapp.post.controller.response.PostResponse;
+import com.sendkite.teatapp.post.domain.PostCreate;
 import com.sendkite.teatapp.post.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,8 @@
 package com.sendkite.teatapp.post.controller;
 
-import com.sendkite.teatapp.user.controller.UserController;
 import com.sendkite.teatapp.post.controller.response.PostResponse;
 import com.sendkite.teatapp.post.domain.PostUpdate;
-import com.sendkite.teatapp.post.infrastructure.PostEntity;
 import com.sendkite.teatapp.post.service.PostService;
-import com.sendkite.teatapp.user.controller.response.UserResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

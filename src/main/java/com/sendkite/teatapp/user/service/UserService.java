@@ -1,14 +1,13 @@
 package com.sendkite.teatapp.user.service;
 
-import com.sendkite.teatapp.common.domain.exception.CertificationCodeNotMatchedException;
 import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
+import com.sendkite.teatapp.common.service.port.ClockHolder;
+import com.sendkite.teatapp.common.service.port.UuidHolder;
 import com.sendkite.teatapp.user.domain.User;
-import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserCreate;
+import com.sendkite.teatapp.user.domain.UserStatus;
 import com.sendkite.teatapp.user.domain.UserUpdate;
 import com.sendkite.teatapp.user.service.port.UserRepository;
-import java.time.Clock;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +18,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final CertificationService certificationService;
+    private final UuidHolder uuidHolder;
+    private final ClockHolder clockHolder;
 
 
     public User getByEmail(String email) {
@@ -36,7 +37,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(
             () -> new ResourceNotFoundException("Users", id)
         );
-        user = user.login();
+        user = user.login(clockHolder);
         userRepository.save(user);
     }
 
@@ -51,7 +52,7 @@ public class UserService {
 
     @Transactional
     public User create(UserCreate userCreate) {
-        User user = User.from(userCreate);
+        User user = User.from(userCreate, uuidHolder);
         user = userRepository.save(user);
         certificationService.send(userCreate.getEmail(), user.getId(), user.getCertificationCode());
         return user;

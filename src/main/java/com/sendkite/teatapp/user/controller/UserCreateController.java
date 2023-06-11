@@ -1,9 +1,8 @@
 package com.sendkite.teatapp.user.controller;
 
+import com.sendkite.teatapp.user.controller.response.UserResponse;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserCreate;
-import com.sendkite.teatapp.user.controller.response.UserResponse;
-import com.sendkite.teatapp.user.infrastructure.UserEntity;
 import com.sendkite.teatapp.user.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
