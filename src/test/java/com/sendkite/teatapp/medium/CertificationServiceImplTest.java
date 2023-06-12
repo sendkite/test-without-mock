@@ -6,15 +6,17 @@ import com.sendkite.teatapp.mock.FakeMailSender;
 import com.sendkite.teatapp.user.service.CertificationService;
 import org.junit.jupiter.api.Test;
 
-class CertificationServiceTest {
+class CertificationServiceImplTest {
 
     @Test
     void 이메일_컨텐츠_제대로_만들어져서_보내지는지_테스트() {
         // given
         FakeMailSender fakeMailSender = new FakeMailSender();
-        CertificationService certificationService = new CertificationService(fakeMailSender);
+        CertificationService certificationServiceImpl = new CertificationService(
+            fakeMailSender);
         // when
-        certificationService.send("hello2@naver.com", 1, "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
+        certificationServiceImpl.send("hello2@naver.com", 1,
+            "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab");
         // then
         assertThat(fakeMailSender.email).isEqualTo("hello2@naver.com");
         assertThat(fakeMailSender.title).isEqualTo("TeaTapp Email Certification");

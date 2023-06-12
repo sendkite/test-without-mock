@@ -2,6 +2,7 @@ package com.sendkite.teatapp.post.service;
 
 import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.common.service.port.ClockHolder;
+import com.sendkite.teatapp.post.controller.port.PostService;
 import com.sendkite.teatapp.post.domain.Post;
 import com.sendkite.teatapp.post.domain.PostCreate;
 import com.sendkite.teatapp.post.domain.PostUpdate;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Builder
 @RequiredArgsConstructor
-public class PostService {
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;

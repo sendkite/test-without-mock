@@ -3,6 +3,10 @@ package com.sendkite.teatapp.user.service;
 import com.sendkite.teatapp.common.domain.exception.ResourceNotFoundException;
 import com.sendkite.teatapp.common.service.port.ClockHolder;
 import com.sendkite.teatapp.common.service.port.UuidHolder;
+import com.sendkite.teatapp.user.controller.port.AuthenticationService;
+import com.sendkite.teatapp.user.controller.port.UserCreateService;
+import com.sendkite.teatapp.user.controller.port.UserReadService;
+import com.sendkite.teatapp.user.controller.port.UserUpdateService;
 import com.sendkite.teatapp.user.domain.User;
 import com.sendkite.teatapp.user.domain.UserCreate;
 import com.sendkite.teatapp.user.domain.UserStatus;
@@ -16,13 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Builder
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl implements UserCreateService, UserReadService, UserUpdateService, AuthenticationService {
 
     private final UserRepository userRepository;
     private final CertificationService certificationService;
     private final UuidHolder uuidHolder;
     private final ClockHolder clockHolder;
-
 
     public User getByEmail(String email) {
         return userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)

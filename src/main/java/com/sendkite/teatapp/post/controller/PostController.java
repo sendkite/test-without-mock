@@ -1,9 +1,10 @@
 package com.sendkite.teatapp.post.controller;
 
+import com.sendkite.teatapp.post.controller.port.PostService;
 import com.sendkite.teatapp.post.controller.response.PostResponse;
 import com.sendkite.teatapp.post.domain.PostUpdate;
-import com.sendkite.teatapp.post.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "게시물(posts)")
 @RestController
 @RequestMapping("/api/posts")
+@Builder
 @RequiredArgsConstructor
 public class PostController {
 
